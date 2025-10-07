@@ -28,7 +28,25 @@ public class BookingService {
 
     public BookingResponseDTO createBooking(BookingRequestDTO dto) {
         User user = userRepository.findById(dto.getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
-        Car car = carRepository.findById(dto.getCarId()).orElseThrow(() -> new RuntimeException("Car not found"));
+        
+        // Handle car lookup by name, create if doesn't exist
+        Car car;
+        if (dto.getCarName() != null && !dto.getCarName().isEmpty()) {
+            car = carRepository.findByName(dto.getCarName())
+                    .orElseGet(() -> {
+                        // Create new car if it doesn't exist
+                        Car newCar = new Car();
+                        newCar.setName(dto.getCarName());
+                        newCar.setImage(dto.getCarImage() != null ? dto.getCarImage() : "/default-car.jpg");
+                        newCar.setLocation(dto.getCarLocation() != null ? dto.getCarLocation() : "Default Location");
+                        newCar.setPrice(dto.getPrice() != null ? dto.getPrice().toString() : "0");
+                        return carRepository.save(newCar);
+                    });
+        } else if (dto.getCarId() != null) {
+            car = carRepository.findById(dto.getCarId()).orElseThrow(() -> new RuntimeException("Car not found"));
+        } else {
+            throw new RuntimeException("Either carName or carId must be provided");
+        }
 
         Booking booking = new Booking();
         booking.setUser(user);
@@ -39,6 +57,12 @@ public class BookingService {
         booking.setDurationHours(dto.getDurationHours());
         booking.setPaymentMethod(dto.getPaymentMethod());
         booking.setPaymentIdentifier(dto.getPaymentIdentifier());
+        
+        // Set additional booking details
+        booking.setTotalPrice(dto.getPrice());
+        booking.setCarName(dto.getCarName());
+        booking.setCarImage(dto.getCarImage());
+        booking.setCarLocation(dto.getCarLocation());
 
         Booking saved = bookingRepository.save(booking);
 
@@ -51,7 +75,12 @@ public class BookingService {
                 saved.getPickupDateTime(),
                 saved.getDurationHours(),
                 saved.getPaymentMethod(),
-                saved.getPaymentIdentifier()
+                saved.getPaymentIdentifier(),
+                saved.getCarName(),
+                saved.getCarImage(),
+                saved.getCarLocation(),
+                saved.getTotalPrice(),
+                saved.getUser().getEmail()
         );
     }
 
@@ -79,7 +108,12 @@ public class BookingService {
                 b.getPickupDateTime(),
                 b.getDurationHours(),
                 b.getPaymentMethod(),
-                b.getPaymentIdentifier()
+                b.getPaymentIdentifier(),
+                b.getCarName(),
+                b.getCarImage(),
+                b.getCarLocation(),
+                b.getTotalPrice(),
+                b.getUser().getEmail()
         );
     }
 }

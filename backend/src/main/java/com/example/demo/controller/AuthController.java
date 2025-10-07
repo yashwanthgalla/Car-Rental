@@ -67,4 +67,23 @@ public class AuthController {
             return ResponseEntity.status(401).body(error);
         }
     }
+
+    // ================== GET USER BY EMAIL ==================
+    @GetMapping("/user")
+    public ResponseEntity<?> getUserByEmail(@RequestParam String email) {
+        User user = userService.getUserByEmail(email);
+        if (user != null) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("id", user.getId());
+            response.put("email", user.getEmail());
+            response.put("fullName", user.getFullName());
+            response.put("phone", user.getPhone());
+            response.put("roles", user.getRoles());
+            return ResponseEntity.ok(response);
+        } else {
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "User not found");
+            return ResponseEntity.status(404).body(error);
+        }
+    }
 }

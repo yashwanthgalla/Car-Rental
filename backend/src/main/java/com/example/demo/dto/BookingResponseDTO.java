@@ -12,10 +12,20 @@ public class BookingResponseDTO {
     private int durationHours;
     private String paymentMethod;
     private String paymentIdentifier;
+    
+    // Additional car details for frontend
+    private String carName;
+    private String carImage;
+    private String carLocation;
+    private Double price;
+    private String email;
 
     public BookingResponseDTO() {}
 
-    public BookingResponseDTO(Long id, Long userId, Long carId, String tripType, String pickupLocation, LocalDateTime pickupDateTime, int durationHours, String paymentMethod, String paymentIdentifier) {
+    public BookingResponseDTO(Long id, Long userId, Long carId, String tripType, String pickupLocation, 
+                            LocalDateTime pickupDateTime, int durationHours, String paymentMethod, 
+                            String paymentIdentifier, String carName, String carImage, 
+                            String carLocation, Double price, String email) {
         this.id = id;
         this.userId = userId;
         this.carId = carId;
@@ -25,6 +35,11 @@ public class BookingResponseDTO {
         this.durationHours = durationHours;
         this.paymentMethod = paymentMethod;
         this.paymentIdentifier = paymentIdentifier;
+        this.carName = carName;
+        this.carImage = carImage;
+        this.carLocation = carLocation;
+        this.price = price;
+        this.email = email;
     }
 
     // Getters & Setters
@@ -46,4 +61,20 @@ public class BookingResponseDTO {
     public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
     public String getPaymentIdentifier() { return paymentIdentifier; }
     public void setPaymentIdentifier(String paymentIdentifier) { this.paymentIdentifier = paymentIdentifier; }
+    
+    // New getters and setters
+    public String getCarName() { return carName; }
+    public void setCarName(String carName) { this.carName = carName; }
+    
+    public String getCarImage() { return carImage; }
+    public void setCarImage(String carImage) { this.carImage = carImage; }
+    
+    public String getCarLocation() { return carLocation; }
+    public void setCarLocation(String carLocation) { this.carLocation = carLocation; }
+    
+    public Double getPrice() { return price; }
+    public void setPrice(Double price) { this.price = price; }
+    
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 }

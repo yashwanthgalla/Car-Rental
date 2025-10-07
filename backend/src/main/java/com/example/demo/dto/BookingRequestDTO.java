@@ -15,6 +15,9 @@ public class BookingRequestDTO {
     private String paymentIdentifier;
     private String selectedPlan;    // "hourly" or "daily"
     private Double price;           // Price sent from frontend
+    private String carName;         // Car name from frontend
+    private String carImage;        // Car image path
+    private String carLocation;     // Car location
 
     // ================== Getters & Setters ==================
     public Long getUserId() { return userId; }
@@ -49,4 +52,13 @@ public class BookingRequestDTO {
 
     public Double getPrice() { return price; }
     public void setPrice(Double price) { this.price = price; }
+
+    public String getCarName() { return carName; }
+    public void setCarName(String carName) { this.carName = carName; }
+
+    public String getCarImage() { return carImage; }
+    public void setCarImage(String carImage) { this.carImage = carImage; }
+
+    public String getCarLocation() { return carLocation; }
+    public void setCarLocation(String carLocation) { this.carLocation = carLocation; }
 }

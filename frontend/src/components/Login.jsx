@@ -66,7 +66,8 @@ const Login = ({ onClose, onSignupClick, onLoginSuccess }) => {
         if ((res.data.role || role) === "ROLE_ADMIN") {
           navigate("/admin-dashboard");
         } else {
-          navigate("/welcome", { state: { role: res.data.role || role } });
+          navigate("/"); // Stay on homepage after login
+          window.location.reload(); // Refresh to update header state
         }
       }, 1000);
     } catch (err) {

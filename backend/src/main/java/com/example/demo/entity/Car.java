@@ -12,6 +12,10 @@ public class Car {
 
     private String brand;
     private String model;
+    private String name; // Full car name
+    private String image; // Car image path
+    private String location; // Car location
+    private String price; // Price as string (can include currency)
     private Double pricePerDay;
     private Boolean available;
 
@@ -35,6 +39,18 @@ public class Car {
 
     public String getModel() { return model; }
     public void setModel(String model) { this.model = model; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public String getImage() { return image; }
+    public void setImage(String image) { this.image = image; }
+
+    public String getLocation() { return location; }
+    public void setLocation(String location) { this.location = location; }
+
+    public String getPrice() { return price; }
+    public void setPrice(String price) { this.price = price; }
 
     public Double getPricePerDay() { return pricePerDay; }
     public void setPricePerDay(Double pricePerDay) { this.pricePerDay = pricePerDay; }

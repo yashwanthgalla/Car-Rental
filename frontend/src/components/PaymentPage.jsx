@@ -15,16 +15,88 @@ const PaymentPage = () => {
     </p>;
   }
 
-  const handlePayment = (e) => {
+  const handlePayment = async (e) => {
     e.preventDefault();
 
-    // Save booking data in localStorage
-    const existingBookings = JSON.parse(localStorage.getItem("myBookings")) || [];
-    const newBooking = { car, selectedPlan, price, tripDetails };
-    localStorage.setItem("myBookings", JSON.stringify([...existingBookings, newBooking]));
+    const userEmail = localStorage.getItem("email");
+    if (!userEmail) {
+      alert("Please login to complete the booking");
+      return;
+    }
 
-    setShowSuccess(true);
-    // Removed automatic redirection - users can now manually choose where to go
+    setShowSuccess(false);
+    
+    // Prepare booking data for backend
+    const bookingData = {
+      email: userEmail,
+      carName: car.name,
+      carImage: car.image,
+      tripType: selectedPlan,
+      pickupLocation: tripDetails?.pickupLocation || "Default Location",
+      pickupDateTime: `${tripDetails?.pickupDate || new Date().toISOString().split('T')[0]}T${tripDetails?.pickupTime || "10:00"}:00`,
+      durationHours: parseInt(tripDetails?.duration?.replace(/[^0-9]/g, '') || "24"),
+      paymentMethod: paymentMode,
+      paymentIdentifier: `PAY_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      price: price,
+      carLocation: car.location
+    };
+
+    try {
+      // Send booking data to backend
+      const response = await fetch("http://localhost:8082/api/bookings/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}` // Add auth token if available
+        },
+        body: JSON.stringify(bookingData)
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Booking created successfully:", result);
+        
+        // Also save to localStorage for immediate access (fallback)
+        const existingBookings = JSON.parse(localStorage.getItem("myBookings")) || [];
+        const localBooking = { 
+          ...bookingData, 
+          id: result.id || Date.now(),
+          createdAt: new Date().toISOString()
+        };
+        localStorage.setItem("myBookings", JSON.stringify([...existingBookings, localBooking]));
+        
+        setShowSuccess(true);
+      } else {
+        const errorData = await response.json();
+        console.error("Backend booking failed:", errorData);
+        alert(`Booking failed: ${errorData.message || "Please try again"}`);
+        
+        // Fallback to localStorage if backend fails
+        const existingBookings = JSON.parse(localStorage.getItem("myBookings")) || [];
+        const fallbackBooking = { 
+          ...bookingData, 
+          id: Date.now(),
+          createdAt: new Date().toISOString(),
+          source: "localStorage_fallback"
+        };
+        localStorage.setItem("myBookings", JSON.stringify([...existingBookings, fallbackBooking]));
+        setShowSuccess(true);
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      alert("Network error. Saving booking locally.");
+      
+      // Fallback to localStorage if network fails
+      const existingBookings = JSON.parse(localStorage.getItem("myBookings")) || [];
+      const fallbackBooking = { 
+        ...bookingData, 
+        id: Date.now(),
+        createdAt: new Date().toISOString(),
+        source: "localStorage_fallback"
+      };
+      localStorage.setItem("myBookings", JSON.stringify([...existingBookings, fallbackBooking]));
+      setShowSuccess(true);
+    }
   };
 
   return (

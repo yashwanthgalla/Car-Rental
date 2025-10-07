@@ -1,7 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Contact.css";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent page reload
+    setIsSubmitting(true);
+
+    // Simulate form submission
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setShowSuccess(true);
+      
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: ""
+      });
+
+      // Hide success message after 3 seconds
+      setTimeout(() => {
+        setShowSuccess(false);
+      }, 3000);
+    }, 1000);
+  };
   return (
     <section id="contact" className="contact">
       <h2 className="contact-title">Contact Us</h2>
@@ -37,24 +77,67 @@ const Contact = () => {
           </div>
         </div>
         <div className="contact-form">
-          <form>
+          {showSuccess && (
+            <div className="success-message">
+              ✅ Message sent successfully! We'll get back to you soon.
+            </div>
+          )}
+          
+          <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label className="form-label">Your Name</label>
-              <input type="text" className="form-control" placeholder="John Doe" required />
+              <input 
+                type="text" 
+                name="name"
+                className="form-control" 
+                placeholder="John Doe" 
+                value={formData.name}
+                onChange={handleInputChange}
+                required 
+              />
             </div>
             <div className="form-group">
               <label className="form-label">Your Email</label>
-              <input type="email" className="form-control" placeholder="john@example.com" required />
+              <input 
+                type="email" 
+                name="email"
+                className="form-control" 
+                placeholder="john@example.com" 
+                value={formData.email}
+                onChange={handleInputChange}
+                required 
+              />
             </div>
             <div className="form-group">
               <label className="form-label">Subject</label>
-              <input type="text" className="form-control" placeholder="Rental Inquiry" required />
+              <input 
+                type="text" 
+                name="subject"
+                className="form-control" 
+                placeholder="Rental Inquiry" 
+                value={formData.subject}
+                onChange={handleInputChange}
+                required 
+              />
             </div>
             <div className="form-group">
               <label className="form-label">Your Message</label>
-              <textarea className="form-control" placeholder="Tell us about your rental needs..." required></textarea>
+              <textarea 
+                name="message"
+                className="form-control" 
+                placeholder="Tell us about your rental needs..." 
+                value={formData.message}
+                onChange={handleInputChange}
+                required
+              ></textarea>
             </div>
-            <button type="submit" className="submit-btn">Send Message</button>
+            <button 
+              type="submit" 
+              className="submit-btn" 
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Sending..." : "Send Message"}
+            </button>
           </form>
         </div>
       </div>

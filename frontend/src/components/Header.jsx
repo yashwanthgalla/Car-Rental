@@ -12,6 +12,8 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [logoutMessage, setLogoutMessage] = useState(false);
   const [userRole, setUserRole] = useState("");
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -21,21 +23,31 @@ const Header = () => {
 
   useEffect(() => {
     const role = localStorage.getItem("role");
+    const email = localStorage.getItem("email");
     if (role) {
       setIsLoggedIn(true);
       setUserRole(role);
+      setUserEmail(email || "user@example.com");
     }
   }, []);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleProfileDropdown = () => {
+    setShowProfileDropdown(!showProfileDropdown);
+  };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
     setUserRole("");
+    setUserEmail("");
+    setShowProfileDropdown(false);
     localStorage.removeItem("role");
+    localStorage.removeItem("email");
+    localStorage.removeItem("token");
     setLogoutMessage(true);
     setTimeout(() => setLogoutMessage(false), 3000);
   };
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <>
@@ -65,7 +77,33 @@ const Header = () => {
           )}
 
           {isLoggedIn ? (
-            <button className="auth-button logout-btn" onClick={handleLogout}>Logout</button>
+            <div className="profile-dropdown">
+              <button className="profile-btn" onClick={toggleProfileDropdown}>
+                <img src="/logo/ferrari-logo.png" alt="Profile" className="profile-avatar" />
+                <span className="profile-email">{userEmail}</span>
+                <span className="dropdown-arrow">{showProfileDropdown ? "▲" : "▼"}</span>
+              </button>
+              
+              {showProfileDropdown && (
+                <div className="profile-menu">
+                  <div className="profile-info">
+                    <div className="profile-name">{userEmail}</div>
+                    <div className="profile-role">{userRole === "ROLE_ADMIN" ? "Admin" : "User"}</div>
+                  </div>
+                  <hr className="profile-divider" />
+                  <Link to="/mybookings" className="profile-menu-item" onClick={() => {setShowProfileDropdown(false); setIsMenuOpen(false);}}>
+                    📋 My Bookings
+                  </Link>
+                  <Link to="/maintenance" className="profile-menu-item" onClick={() => {setShowProfileDropdown(false); setIsMenuOpen(false);}}>
+                    🔧 Maintenance
+                  </Link>
+                  <hr className="profile-divider" />
+                  <button className="profile-menu-item logout-item" onClick={handleLogout}>
+                    🚪 Logout
+                  </button>
+                </div>
+              )}
+            </div>
           ) : (
             <>
               <button className="auth-button login-btn" onClick={() => setShowLogin(true)}>Login</button>

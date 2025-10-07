@@ -33,6 +33,12 @@ public class Booking {
 
     private String paymentMethod; // optional
     private String paymentIdentifier; // optional
+    
+    // Additional fields for booking details
+    private Double totalPrice;
+    private String carName;
+    private String carImage;
+    private String carLocation;
 
     // Getters & Setters
     public Long getId() { return id; }
@@ -53,4 +59,14 @@ public class Booking {
     public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
     public String getPaymentIdentifier() { return paymentIdentifier; }
     public void setPaymentIdentifier(String paymentIdentifier) { this.paymentIdentifier = paymentIdentifier; }
+    
+    // New getters and setters
+    public Double getTotalPrice() { return totalPrice; }
+    public void setTotalPrice(Double totalPrice) { this.totalPrice = totalPrice; }
+    public String getCarName() { return carName; }
+    public void setCarName(String carName) { this.carName = carName; }
+    public String getCarImage() { return carImage; }
+    public void setCarImage(String carImage) { this.carImage = carImage; }
+    public String getCarLocation() { return carLocation; }
+    public void setCarLocation(String carLocation) { this.carLocation = carLocation; }
 }
