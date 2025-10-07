@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px 0px 20px 0px;
+    background-color: rgb(0,0, 123);
+
+}
+
+.container-in p{
+    color: white;
+    font-size: medium;
+}
+
+.container-in{
+    border: 1px solid black;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+}
+.login-heading{
+    display: flex;
+    
+    align-items: center;
+    
+}
