@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./MyBooking.css";
 
 const MyBookings = () => {
@@ -7,6 +8,7 @@ const MyBookings = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const userEmail = localStorage.getItem("email");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBookings = async () => {

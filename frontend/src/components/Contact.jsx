@@ -65,7 +65,7 @@ const Contact = () => {
             <div className="info-icon">✉️</div>
             <div className="info-content">
               <h3 className="info-title">Email Us</h3>
-              <p className="info-text">info@redbullrentals.com</p>
+              <p className="info-text">info@ferrarirentals.com</p>
             </div>
           </div>
           <div className="info-item">

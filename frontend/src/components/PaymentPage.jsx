@@ -37,65 +37,58 @@ const PaymentPage = () => {
       durationHours: parseInt(tripDetails?.duration?.replace(/[^0-9]/g, '') || "24"),
       paymentMethod: paymentMode,
       paymentIdentifier: `PAY_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      price: price,
+      price: parseFloat(price.replace(/[₹,]/g, '')), // Convert price to number, remove ₹ symbol
       carLocation: car.location
     };
 
     try {
-      // Send booking data to backend
+      console.log("Creating booking...");
+      console.log("Booking data:", bookingData);
+      
       const response = await fetch("http://localhost:8082/api/bookings/create", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("token")}` // Add auth token if available
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(bookingData)
       });
 
+      console.log("Response status:", response.status);
+      console.log("Response headers:", response.headers);
+
       if (response.ok) {
         const result = await response.json();
-        console.log("Booking created successfully:", result);
+        console.log("✅ Booking saved to backend:", result);
         
-        // Also save to localStorage for immediate access (fallback)
+        
+        // Save to localStorage for immediate access
         const existingBookings = JSON.parse(localStorage.getItem("myBookings")) || [];
         const localBooking = { 
           ...bookingData, 
-          id: result.id || Date.now(),
+          id: result.id,
           createdAt: new Date().toISOString()
         };
         localStorage.setItem("myBookings", JSON.stringify([...existingBookings, localBooking]));
         
         setShowSuccess(true);
       } else {
-        const errorData = await response.json();
-        console.error("Backend booking failed:", errorData);
-        alert(`Booking failed: ${errorData.message || "Please try again"}`);
+        const errorText = await response.text();
+        console.error("❌ Backend error:", response.status, errorText);
         
-        // Fallback to localStorage if backend fails
-        const existingBookings = JSON.parse(localStorage.getItem("myBookings")) || [];
-        const fallbackBooking = { 
-          ...bookingData, 
-          id: Date.now(),
-          createdAt: new Date().toISOString(),
-          source: "localStorage_fallback"
-        };
-        localStorage.setItem("myBookings", JSON.stringify([...existingBookings, fallbackBooking]));
-        setShowSuccess(true);
+        // Try to parse error message
+        let errorMessage = errorText;
+        try {
+          const errorJson = JSON.parse(errorText);
+          errorMessage = errorJson.message || errorJson.error || errorText;
+        } catch (e) {
+          // errorText is not JSON, use as is
+        }
+        
+        alert(`❌ Booking failed: ${errorMessage}\n\nStatus: ${response.status}\nPlease check:\n- Backend is running\n- Database is connected\n- User exists in database`);
       }
     } catch (error) {
-      console.error("Network error:", error);
-      alert("Network error. Saving booking locally.");
-      
-      // Fallback to localStorage if network fails
-      const existingBookings = JSON.parse(localStorage.getItem("myBookings")) || [];
-      const fallbackBooking = { 
-        ...bookingData, 
-        id: Date.now(),
-        createdAt: new Date().toISOString(),
-        source: "localStorage_fallback"
-      };
-      localStorage.setItem("myBookings", JSON.stringify([...existingBookings, fallbackBooking]));
-      setShowSuccess(true);
+      console.error("❌ Network error:", error);
+      alert(`❌ Connection failed: ${error.message}\n\nPlease check:\n- Backend server is running on port 8082\n- Network connection\n- CORS configuration`);
     }
   };
 
@@ -179,7 +172,7 @@ const PaymentPage = () => {
 
             <div className="gp-actions">
               <button className="btn btn-ghost" onClick={() => { setShowSuccess(false); navigate("/"); }}>Done</button>
-              <button className="btn btn-outline" onClick={() => navigate("/my-bookings")}>View Booking</button>
+              <button className="btn btn-outline" onClick={() => navigate("/mybookings")}>View Booking</button>
             </div>
           </div>
         </div>
