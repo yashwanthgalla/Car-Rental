@@ -1,0 +1,53 @@
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 12px 20px;
+    background-color: var(--ferrari-dark-red);
+    color: white;
+    font-family: sans-serif;
+  }
+  
+  .search-bar .field {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+  }
+  
+  .search-bar .field label {
+    font-size: 11px;
+    color: var(--ferrari-light-red);
+    margin-bottom: 4px;
+  }
+  
+  .search-bar .field input,
+  .search-bar .field select {
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(183, 28, 28, 0.7);
+    color: white;
+  }
+  
+  .search-bar .search-btn {
+    background: var(--ferrari-red);
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 999px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .success-msg {
+    color: var(--ferrari-light-red);
+    font-weight: bold;
+    margin-top: 10px;
+    animation: fadeInOut 3s ease-in-out;
+  }
+  
+  @keyframes fadeInOut {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+  }

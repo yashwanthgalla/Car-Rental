@@ -1,0 +1,35 @@
+.dashboard-container {
+  text-align: center;
+  padding: 50px;
+}
+
+.admin-buttons {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.admin-buttons button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  background-color: var(--ferrari-red);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.admin-buttons button:hover {
+  background-color: #0056b3;
+}
+
+.logout-button {
+  background-color: orange;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}

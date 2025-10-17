@@ -1,0 +1,769 @@
+/* Ferrari Car Rental - My Bookings Page */
+:root {
+  --ferrari-red: #dc143c;
+  --ferrari-dark-red: #b71c1c;
+  --ferrari-gold: #ffd700;
+  --ferrari-black: #1a1a1a;
+  --ferrari-gray: #333;
+  --ferrari-light-gray: #f5f5f5;
+  --ferrari-white: #ffffff;
+  --shadow-light: 0 2px 15px rgba(220, 20, 60, 0.1);
+  --shadow-medium: 0 6px 25px rgba(220, 20, 60, 0.15);
+  --shadow-heavy: 0 10px 40px rgba(220, 20, 60, 0.25);
+  --gradient-primary: linear-gradient(135deg, var(--ferrari-red) 0%, var(--ferrari-dark-red) 100%);
+  --gradient-gold: linear-gradient(135deg, var(--ferrari-gold) 0%, #ffed4e 100%);
+  --gradient-bg: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+/* Page Layout */
+.bookings-page {
+  min-height: 100vh;
+  background: var(--gradient-bg);
+  padding: 30px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+}
+
+.bookings-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('/background.png') center/cover no-repeat;
+  opacity: 0.03;
+  z-index: -1;
+}
+
+/* Header Section */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto 40px auto;
+  padding: 25px 30px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--shadow-medium);
+  border: 2px solid var(--ferrari-red);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+}
+
+.back-btn {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: 14px 25px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-heavy);
+  background: var(--ferrari-dark-red);
+}
+
+.page-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--ferrari-black);
+  margin: 0;
+  text-align: center;
+  flex: 1;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(220, 20, 60, 0.1);
+}
+
+.header-logo .ferrari-logo {
+  height: 60px;
+  width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid var(--ferrari-light-gray);
+  border-top: 5px solid var(--ferrari-red);
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+  margin-bottom: 25px;
+  box-shadow: var(--shadow-light);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-container p {
+  font-size: 1.2rem;
+  color: var(--ferrari-gray);
+  font-weight: 500;
+}
+
+/* Error State */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  color: var(--ferrari-gray);
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  margin: 0 auto;
+  max-width: 600px;
+  box-shadow: var(--shadow-medium);
+}
+
+.error-icon {
+  font-size: 5rem;
+  margin-bottom: 20px;
+  color: var(--ferrari-red);
+}
+
+.error-container h2 {
+  color: var(--ferrari-black);
+  margin-bottom: 15px;
+}
+
+.retry-btn {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 25px;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-light);
+}
+
+.retry-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-medium);
+}
+
+.empty-icon {
+  font-size: 5rem;
+  margin-bottom: 25px;
+  color: var(--ferrari-gold);
+}
+
+.empty-state h2 {
+  color: var(--ferrari-black);
+  margin-bottom: 15px;
+  font-size: 2rem;
+}
+
+.browse-cars-btn {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: 18px 35px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 30px;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-medium);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.browse-cars-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-heavy);
+}
+
+/* Booking Stats */
+.booking-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  max-width: 1400px;
+  margin: 0 auto 40px auto;
+}
+
+.stat-card {
+  background: white;
+  padding: 30px 25px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: var(--shadow-light);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover::before {
+  transform: scaleX(1);
+}
+
+.stat-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-heavy);
+  border-color: var(--ferrari-red);
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--ferrari-red);
+  margin-bottom: 12px;
+  text-shadow: 0 2px 4px rgba(220, 20, 60, 0.1);
+}
+
+.stat-label {
+  font-size: 1.1rem;
+  color: var(--ferrari-gray);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Filter Section */
+.filter-section {
+  max-width: 1400px;
+  margin: 0 auto 40px auto;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: white;
+  color: var(--ferrari-gray);
+  border: 2px solid var(--ferrari-light-gray);
+  padding: 15px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-primary);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.filter-btn:hover::before {
+  left: 0;
+}
+
+.filter-btn:hover {
+  color: white;
+  border-color: var(--ferrari-red);
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background: var(--gradient-primary);
+  color: white;
+  border-color: var(--ferrari-red);
+  box-shadow: var(--shadow-medium);
+}
+
+.filter-btn.active::before {
+  left: 0;
+}
+
+/* Bookings Grid */
+.bookings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Booking Card */
+.booking-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-light);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+  max-width: 320px;
+  width: 100%;
+}
+
+.booking-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.booking-card:hover::before {
+  transform: scaleX(1);
+}
+
+.booking-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-heavy);
+}
+
+.booking-card.upcoming {
+  border-color: var(--ferrari-gold);
+}
+
+.booking-card.upcoming::before {
+  background: var(--gradient-gold);
+}
+
+.booking-card.completed {
+  border-color: #28a745;
+}
+
+.booking-card.completed::before {
+  background: linear-gradient(135deg, #28a745, #20c997);
+}
+
+/* Status Badge */
+.status-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--gradient-primary);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 9px;
+  font-weight: 700;
+  z-index: 2;
+  box-shadow: var(--shadow-light);
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+}
+
+.booking-card.upcoming .status-badge {
+  background: var(--gradient-gold);
+  color: var(--ferrari-black);
+}
+
+.booking-card.completed .status-badge {
+  background: linear-gradient(135deg, #28a745, #20c997);
+}
+
+/* Car Section */
+.car-section {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background: linear-gradient(135deg, var(--ferrari-light-gray), white);
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+
+.car-image-container {
+  width: 70px;
+  height: 50px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-right: 12px;
+  box-shadow: var(--shadow-light);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.car-image-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.car-image-container:hover::before {
+  transform: translateX(100%);
+}
+
+.car-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.car-image:hover {
+  transform: scale(1.08);
+}
+
+.car-info {
+  flex: 1;
+}
+
+.car-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ferrari-black);
+  margin: 0 0 4px 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  line-height: 1.2;
+}
+
+.car-type {
+  color: var(--ferrari-gray);
+  font-size: 0.75rem;
+  margin: 0 0 6px 0;
+  font-weight: 500;
+}
+
+.price-tag {
+  background: var(--gradient-primary);
+  color: white;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: inline-block;
+  box-shadow: var(--shadow-light);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Booking Details */
+.booking-details {
+  padding: 12px;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px;
+  background: var(--ferrari-light-gray);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.detail-item:hover {
+  background: #f0f0f0;
+  transform: translateX(5px);
+}
+
+.detail-icon {
+  font-size: 1rem;
+  min-width: 18px;
+  margin-top: 1px;
+  color: var(--ferrari-red);
+}
+
+.detail-content {
+  flex: 1;
+}
+
+.detail-label {
+  font-size: 0.7rem;
+  color: var(--ferrari-gray);
+  font-weight: 600;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.detail-value {
+  font-size: 0.85rem;
+  color: var(--ferrari-black);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* Action Buttons */
+.booking-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.action-btn {
+  background: white;
+  color: var(--ferrari-red);
+  border: 2px solid var(--ferrari-red);
+  padding: 6px 12px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  flex: 1;
+  min-width: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--ferrari-red);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.action-btn:hover::before {
+  left: 0;
+}
+
+.action-btn:hover {
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-light);
+}
+
+.modify-btn {
+  border-color: var(--ferrari-gold);
+  color: var(--ferrari-gold);
+}
+
+.modify-btn::before {
+  background: var(--ferrari-gold);
+}
+
+.modify-btn:hover {
+  color: var(--ferrari-black);
+}
+
+.review-btn {
+  border-color: #28a745;
+  color: #28a745;
+}
+
+.review-btn::before {
+  background: #28a745;
+}
+
+/* Sync Notice */
+.sync-notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+  color: #856404;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 20px;
+  border: 1px solid #ffeaa7;
+  box-shadow: var(--shadow-light);
+}
+
+.sync-icon {
+  font-size: 1.1rem;
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--ferrari-gray);
+  font-size: 1.2rem;
+  font-weight: 500;
+  grid-column: 1 / -1;
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--shadow-light);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .bookings-page {
+    padding: 15px 10px;
+  }
+  
+  .page-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+    padding: 15px;
+  }
+  
+  .page-title {
+    font-size: 2.2rem;
+  }
+  
+  .bookings-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .car-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .car-image-container {
+    margin-right: 0;
+    margin-bottom: 15px;
+    width: 100%;
+    height: 120px;
+  }
+  
+  .detail-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .booking-actions {
+    flex-direction: column;
+  }
+  
+  .action-btn {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .filter-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .filter-btn {
+    width: 200px;
+  }
+  
+  .booking-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-number {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 1.8rem;
+  }
+  
+  .stat-number {
+    font-size: 2.2rem;
+  }
+  
+  .car-name {
+    font-size: 1.2rem;
+  }
+  
+  .booking-details {
+    padding: 15px;
+  }
+  
+  .car-section {
+    padding: 15px;
+  }
+  
+  .bookings-grid {
+    gap: 15px;
+  }
+  
+  .booking-card {
+    max-width: 100%;
+  }
+}

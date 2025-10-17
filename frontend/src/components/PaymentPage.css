@@ -1,0 +1,449 @@
+.payment-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.payment-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.payment-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  background-color: #f3f3f5;
+  border-radius: 12px;
+  padding: 30px;
+}
+
+.car-summary {
+  flex: 1;
+}
+
+.car-summary-image {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.car-summary h3 {
+  margin-top: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.car-summary p {
+  margin: 6px 0;
+  line-height: 1.5;
+  font-size: 15px;
+}
+
+.trip-summary {
+  flex: 1;
+  background: #f9f9f9;
+  padding: 25px;
+  border-radius: 10px;
+}
+
+.trip-summary h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.trip-summary p {
+  font-size: 15px;
+  margin: 6px 0;
+}
+
+.payment-options {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.payment-btn {
+  flex: 1;
+  padding: 10px 15px;
+  background-color: #fff;
+  color: #dc143c;
+  font-weight: bold;
+  border: 2px solid #dc143c;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.payment-btn:hover {
+  background-color: #dc143c;
+  color: #fff;
+}
+
+.payment-btn.active {
+  background-color: #dc143c;
+  color: #fff;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.payment-form input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.confirm-btn {
+  margin-top: 10px;
+  padding: 12px;
+  background-color: #dc143c;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.confirm-btn:hover {
+  background-color: #b71c1c;
+}
+.payment-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.payment-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.payment-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  background-color: #f3f3f5;
+  border-radius: 12px;
+  padding: 30px;
+}
+
+.car-summary {
+  flex: 1;
+}
+
+.car-summary-image {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.car-summary h3 {
+  margin-top: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.car-summary p {
+  margin: 6px 0;
+  line-height: 1.5;
+  font-size: 15px;
+}
+
+.trip-summary {
+  flex: 1;
+  background: #f9f9f9;
+  padding: 25px;
+  border-radius: 10px;
+}
+
+.trip-summary h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.trip-summary p {
+  font-size: 15px;
+  margin: 6px 0;
+}
+
+.payment-options {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.payment-btn {
+  flex: 1;
+  padding: 10px 15px;
+  background-color: #fff;
+  color: #dc143c;
+  font-weight: bold;
+  border: 2px solid #dc143c;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.payment-btn:hover {
+  background-color: #dc143c;
+  color: #fff;
+}
+
+.payment-btn.active {
+  background-color: #dc143c;
+  color: #fff;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.payment-form input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.confirm-btn {
+  margin-top: 10px;
+  padding: 12px;
+  background-color: #dc143c;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.confirm-btn:hover {
+  background-color: #b71c1c;
+}
+/* Google Pay style "payment successful" animation with Ferrari theme */
+:root{
+  --gp-bg: #ffffff;
+  --gp-surface: #f8fafb;
+  --gp-card-bg: linear-gradient(180deg,#fff,#fbfeff);
+  --gp-text: #202124;
+  --gp-muted: #5f6368;
+  --gp-success: #dc143c; /* Ferrari red instead of green */
+  --gp-success-soft: rgba(220, 20, 60, 0.12);
+  --gp-radius: 16px;
+  --gp-shadow: 0 10px 30px rgba(20,24,28,0.12);
+  --gp-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Container centers the card */
+.gp-success{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: 120px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  font-family: var(--gp-font-sans);
+  z-index: 999;
+}
+
+/* Card */
+.gp-card{
+  width: min(620px, 94%);
+  max-width: 700px;
+  background: var(--gp-card-bg);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow);
+  display:flex;
+  gap: 20px;
+  align-items:center;
+  padding: 22px;
+  border: 1px solid rgba(34,36,38,0.06);
+  box-sizing: border-box;
+}
+
+/* Left: check visual */
+.gp-check{
+  width: 88px;
+  height: 88px;
+  min-width: 88px;
+  display:grid;
+  place-items:center;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(220, 20, 60, 0.12), rgba(220, 20, 60, 0.06));
+  box-shadow: inset 0 -4px 8px rgba(220, 20, 60, 0.03);
+}
+
+/* SVG animation */
+.gp-check-svg{
+  width: 56px;
+  height: 56px;
+  display:block;
+}
+
+/* circle draw */
+.gp-check-circle{
+  stroke: var(--gp-success);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 160;
+  stroke-dashoffset: 160;
+  animation: circle-draw 700ms ease forwards;
+}
+
+/* check draw */
+.gp-check-mark{
+  stroke: var(--gp-success);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: mark-draw 600ms ease 300ms forwards;
+  filter: drop-shadow(0 2px 2px rgba(220, 20, 60, 0.15));
+}
+
+/* Text area */
+.gp-body{
+  flex:1;
+  min-width: 0;
+}
+
+.gp-title{
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gp-text);
+  margin-bottom: 6px;
+}
+
+.gp-amount{
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gp-text);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.gp-meta{
+  color: var(--gp-muted);
+  font-size: 13px;
+}
+
+/* Actions */
+.gp-actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin-left: 12px;
+}
+
+/* Buttons: Ferrari themed */
+.btn{
+  font-family: inherit;
+  font-size: 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  background: #111827;
+  color: #fff;
+  min-height: 40px;
+  box-shadow: none;
+  transition: all 0.3s ease;
+}
+
+/* ghost (Ferrari red primary) */
+.btn-ghost{
+  background: var(--gp-success);
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 6px 14px rgba(220, 20, 60, 0.18);
+}
+
+.btn-ghost:hover{
+  background: #b71c1c;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(220, 20, 60, 0.25);
+}
+
+/* outline */
+.btn-outline{
+  background: transparent;
+  color: var(--gp-text);
+  border: 1px solid rgba(60,64,67,0.08);
+}
+
+.btn-outline:hover{
+  background: rgba(220, 20, 60, 0.05);
+  border-color: var(--gp-success);
+  color: var(--gp-success);
+}
+
+/* Accessibility focus */
+.btn:focus,
+.gp-card:focus-within{
+  outline: 3px solid rgba(220, 20, 60, 0.12);
+  outline-offset: 3px;
+}
+
+/* small screens: stack */
+@media (max-width:520px){
+  .gp-card{
+    flex-direction: column;
+    align-items: stretch;
+    gap:12px;
+  }
+  .gp-actions{
+    justify-content: stretch;
+    margin-left:0;
+  }
+  .btn{ width:100%; }
+}
+
+/* Animations */
+@keyframes circle-draw{
+  to{ stroke-dashoffset: 0; transform: rotate(0.1deg); }
+}
+@keyframes mark-draw{
+  to{ stroke-dashoffset: 0; }
+}
+
+/* Subtle entrance */
+.gp-card{
+  transform-origin: center;
+  animation: card-pop 360ms cubic-bezier(.2,.9,.3,1) both;
+}
+@keyframes card-pop{
+  from{ opacity:0; transform: translateY(8px) scale(.995); }
+  to{ opacity:1; transform: translateY(0) scale(1); }
+}
+
+/* Ferrari Theme Title Colors */
+.payment-title { color: #dc143c !important; }
+.car-summary h3 { color: #dc143c !important; }
+.trip-summary h3 { color: #dc143c !important; }
