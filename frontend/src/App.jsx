@@ -8,7 +8,6 @@ import AdminDashboard from "./components/AdminDashboard";
 import AdminCars from "./components/AdminCars";
 import AdminBookings from "./components/AdminBookings";
 import MyBookings from "./components/MyBookings";
-import Maintenance from "./components/Maintenance";
 import "./App.css";
 
 const App = () => {
@@ -37,7 +36,6 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/mybookings" element={<MyBookings />} />
-          <Route path="/maintenance" element={<Maintenance />} />
 
             {/* Admin Routes - Protected */}
             <Route

@@ -66,11 +66,6 @@ const Header = () => {
           <a className="nav-link" href="#cars" onClick={(e) => { e.preventDefault(); document.getElementById('cars')?.scrollIntoView({ behavior: 'smooth' }); setIsMenuOpen(false); }}>Find Your Car</a>
           <a className="nav-link" href="#contact" onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); setIsMenuOpen(false); }}>Contact</a>
           {isLoggedIn && userRole === "user" && (
-            <Link to="/maintenance" className="nav-link" onClick={() => setIsMenuOpen(false)}>
-              Maintenance
-            </Link>
-          )}
-          {isLoggedIn && userRole === "user" && (
             <Link to="/mybookings" className="nav-link" onClick={() => setIsMenuOpen(false)}>
               MyBookings
             </Link>
@@ -93,9 +88,6 @@ const Header = () => {
                   <hr className="profile-divider" />
                   <Link to="/mybookings" className="profile-menu-item" onClick={() => {setShowProfileDropdown(false); setIsMenuOpen(false);}}>
                     📋 My Bookings
-                  </Link>
-                  <Link to="/maintenance" className="profile-menu-item" onClick={() => {setShowProfileDropdown(false); setIsMenuOpen(false);}}>
-                    🔧 Maintenance
                   </Link>
                   <hr className="profile-divider" />
                   <button className="profile-menu-item logout-item" onClick={handleLogout}>
